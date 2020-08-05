@@ -1,7 +1,7 @@
 # Quote Scraper Selenium
 
-<img src="./images/logos/python.PNG" width="45%" align="left" >
-<img src="./images/logos/selenium_web_driver.jfif" width="45%" >
+<img src="./images/logos/python.PNG" alt="Python programming language logo." width="45%" align="left" >
+<img src="./images/logos/selenium_web_driver.jfif" alt="Selenium Web Driver logo." width="45%" >
 
 ## Table of Contents
 - [Introduction](#introduction)
