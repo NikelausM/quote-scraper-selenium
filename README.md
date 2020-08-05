@@ -23,13 +23,13 @@ The purpose of this application was to become more familiar with browser automat
 
 ## Screenshots
 ### Screenshot of Console Menu
-<img src="./screenshots/console_menu.PNG" alt="A screenshot of the console menu of the application being used.">
+<img src="./images/screenshots/console_menu.PNG" alt="A screenshot of the console menu of the application being used.">
 
 ### Screenshot of Search Page Before Console Input
-<img src="./screenshots/webpage_before.PNG" alt="A screenshot of the search page before entering input into the console menu.">
+<img src="./images/screenshots/webpage_before.PNG" alt="A screenshot of the search page before entering input into the console menu.">
 
 ### Screenshot of Search Page After Console Input
-<img src="./screenshots/webpage_after.PNG" alt="A screenshot of the search page before entering input into the console menu.">
+<img src="./images/screenshots/webpage_after.PNG" alt="A screenshot of the search page before entering input into the console menu.">
 
 ## Setup
 To run, in the console enter:
