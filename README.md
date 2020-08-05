@@ -1,7 +1,7 @@
 # Quote Scraper Selenium
 
-<img src="./images/logos/python.PNG" style="max-width: 50%">
-<img src="./images/logos/selenium_web_driver.jfif" style="max-width: 50%">
+<img src="./images/logos/python.PNG" width="45%" align="left" >
+<img src="./images/logos/selenium_web_driver.jfif" width="45%" >
 
 ## Table of Contents
 - [Introduction](#introduction)
