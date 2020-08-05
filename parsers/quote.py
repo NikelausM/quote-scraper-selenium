@@ -6,15 +6,19 @@ from selenium.webdriver.remote.webelement import WebElement
 
 class QuoteParser:
     """
-    Given one of the specific quote divs, found out the data about the quote
-    (quote content, author, tags).
+    A class that parses a web page for data.
+
+    Parameters
+    ----------
+    parent : WebElement
+        The html content to be parsed.
     """
 
     def __init__(self, parent: WebElement):
         """
         Parameters
         ----------
-        parent : selenium.webdriver.remote.webelement.WebElement
+        parent : WebElement
             The html content to be parsed.
         """
 

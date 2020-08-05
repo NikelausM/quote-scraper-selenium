@@ -1,5 +1,5 @@
 class QuotesPageLocators:
-    """A class that contains the quotes page CSS locators.
+    """A class that contains the quotes search page CSS locators.
 
     Parameters
     ----------

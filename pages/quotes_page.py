@@ -16,7 +16,7 @@ from parsers.quote import QuoteParser
 
 class QuotesPage:
     """
-    A class that retreives a web page from a URL, and parses it for quotes.
+    A class that retreives a web page from a URL, and interacts with it.
     """
 
     def __init__(self, browser: WebDriver):
@@ -138,6 +138,11 @@ class QuotesPage:
             The quote author to search by.
         tag_name : str
             The quote tag to search by.
+
+        Returns
+        -------
+        List[QuoteParser]
+            The list of parsed quotes.
         """
 
         self.select_author(author_name)
