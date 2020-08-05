@@ -1,4 +1,7 @@
+from typing import List
+
 from locators.quote_locators import QuoteLocators
+from selenium.webdriver.remote.webelement import WebElement
 
 
 class QuoteParser:
@@ -7,16 +10,17 @@ class QuoteParser:
     (quote content, author, tags).
     """
 
-    def __init__(self, parent):
+    def __init__(self, parent: WebElement):
         """
         Parameters
         ----------
-        parent : bytes
+        parent : selenium.webdriver.remote.webelement.WebElement
             The html content to be parsed.
         """
+
         self.parent = parent
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         """Returns the string representation of a QuoteParser object.
 
         Returns
@@ -24,10 +28,12 @@ class QuoteParser:
         str
             A string representing the QuoteParser object.
         """
-        return f"<Quote {self.content}, by {self.author}>"
+
+        repr_str = f"<Quote {self.content}, by {self.author}>"
+        return repr_str
 
     @property
-    def author(self):
+    def author(self) -> str:
         """Returns the string representation of the author.
 
         Returns
@@ -35,11 +41,13 @@ class QuoteParser:
         str
             The string representation of the author.
         """
+
         locator = QuoteLocators.AUTHOR
-        return self.parent.find_element_by_css_selector(locator).text
+        author_str = self.parent.find_element_by_css_selector(locator).text
+        return author_str
 
     @property
-    def content(self):
+    def content(self) -> str:
         """Returns the string representation of the content.
 
         Returns
@@ -47,18 +55,22 @@ class QuoteParser:
         str
             The string representation of the content.
         """
+
         locator = QuoteLocators.CONTENT
-        return self.parent.find_element_by_css_selector(locator).text
+        content_str = self.parent.find_element_by_css_selector(locator).text
+        return content_str
 
     @property
-    def tags(self):
+    def tags(self) -> List[str]:
         """Returns the string representation of the tags.
 
         Returns
         ------
-        str
+        List[str]
             The string representation of the tags.
         """
+
         locator = QuoteLocators.TAGS
-        return [e.string for e in
-                self.parent.find_elements_by_css_selector(locator)]
+        tags_str = [e.string for e in
+                    self.parent.find_elements_by_css_selector(locator)]
+        return tags_str

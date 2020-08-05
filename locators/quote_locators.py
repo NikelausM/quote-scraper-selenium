@@ -10,6 +10,7 @@ class QuoteLocators:
     TAGS : str
         The CSS locator that selects the span tag of class tag.
     """
+
     AUTHOR = "span.author"
     CONTENT = "span.content"
     TAGS = "span.tag"

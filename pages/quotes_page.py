@@ -1,7 +1,14 @@
+import time
+
 from typing import List
 
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.support.ui import Select
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.chrome.webdriver import WebDriver
+from selenium.webdriver.remote.webelement import WebElement
 
 from locators.quotes_page_locators import QuotesPageLocators
 from parsers.quote import QuoteParser
@@ -12,13 +19,14 @@ class QuotesPage:
     A class that retreives a web page from a URL, and parses it for quotes.
     """
 
-    def __init__(self, browser):
+    def __init__(self, browser: WebDriver):
         """
         Parameters
         ----------
-        soup : bs4.BeautifulSoup
-            The url of the web page.
+        browser : WebDriver
+            The chrome web driver.
         """
+
         self.browser = browser
 
     @property
@@ -27,54 +35,120 @@ class QuotesPage:
 
         Returns
         -------
-        list
+        List[QuoteParser]
             A list of QuoteParser representing the web page's quotes.
         """
 
         quote_tags = self.browser.find_elements_by_css_selector(
             QuotesPageLocators.QUOTE)
-        return [QuoteParser(e) for e in quote_tags]
+        quote_parsers = [QuoteParser(e) for e in quote_tags]
+        return quote_parsers
 
     @property
     def author_dropdown(self) -> Select:
-        """Selects and returns the author dropdown menu."""
+        """Selects and returns the author dropdown menu.
+
+        Returns
+        -------
+        Select
+            The author drop down menu.
+        """
 
         element = self.browser.find_element_by_css_selector(
             QuotesPageLocators.AUTHOR_DROPDOWN)
-        return Select(element)  # puts element in Select wrapper (dropdown)
+        # puts element in Select wrapper (dropdown)
+        select_element = Select(element)
+
+        return select_element  # puts element in Select wrapper (dropdown)
 
     @property
     def tags_dropdown(self) -> Select:
-        """Selects and returns the tag dropdown menu."""
+        """Selects and returns the tag dropdown menu.
+
+        Returns
+        -------
+        Select
+            The tags drop down menu.
+        """
 
         element = self.browser.find_element_by_css_selector(
             QuotesPageLocators.TAG_DROPDOWN)
-        return Select(element)  # puts element in Select wrapper (dropdown)
+        # puts element in Select wrapper (dropdown)
+        select_element = Select(element)
+
+        return select_element
 
     @property
-    def search_button(self):
-        """Returns the search button."""
+    def search_button(self) -> WebElement:
+        """Returns the search button.
 
-        return self.browser.find_element_by_css_selector(
+        Returns
+        -------
+        WebElement
+            The author drop down menu.
+        """
+
+        element = self.browser.find_element_by_css_selector(
             QuotesPageLocators.SEARCH_BUTTON)
+        return element
 
     def select_author(self, author_name: str):
-        """Select author name in dropdown.
+        """Selects author name in dropdown.
+
+        Parameters
+        ----------
+        author_name : str
+            The author name to be selected.
         """
 
         self.author_dropdown.select_by_visible_text(author_name)
 
     def get_available_tags(self) -> List[str]:
-        """Get available tags from dropdown."""
-        return [option.text.strip() for option in self.tags_dropdown.options]
+        """Gets available tags from dropdown.
+
+        Returns
+        -------
+        List[str]
+            The list of options in the tag drop down menu.
+        """
+
+        available_tags = [option.text.strip()
+                          for option in self.tags_dropdown.options]
+        return available_tags
 
     def select_tag(self, tag_name: str):
-        """Select tag in dropdown"""
+        """Selects tag in dropdown.
+
+        Parameters
+        ----------
+        tag_name : str
+            The string value of the tag name to be selected.
+        """
+
         self.tags_dropdown.select_by_visible_text(tag_name)
 
     def search_for_quotes(self, author_name: str,
                           tag_name: str) -> List[QuoteParser]:
+        """Searches for quotes by author name and tag name
+        and returns quotes if found.
+
+        Parameters
+        ----------
+        author_name : str
+            The quote author to search by.
+        tag_name : str
+            The quote tag to search by.
+        """
+
         self.select_author(author_name)
+
+        # wait up to 10 seconds until tag drop down value option appears
+        WebDriverWait(self.browser, 10).until(
+            expected_conditions.presence_of_element_located(
+                (By.CSS_SELECTOR, QuotesPageLocators.TAG_DROPDOWN_VALUE_OPTION)
+            )
+        )
+
         try:
             self.select_tag(tag_name)
         except NoSuchElementException:
@@ -82,9 +156,12 @@ class QuotesPage:
                 f"Author `{author_name}` does not have any question tagged" +
                 f" with `{tag_name}`."
             )
+
         self.search_button.click()
+
         return self.quotes
 
 
 class InvalidTagForAuthorError(ValueError):
+    """Class to be raised in the event of an invalid tag being provided."""
     pass
