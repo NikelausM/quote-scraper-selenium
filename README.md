@@ -7,7 +7,7 @@
 - [Introduction](#introduction)
 - [Features](#features)
 - [Screenshots](#screenshots)
-- [Lunch](#launch)
+- [Launch](#launch)
 - [Technologies](#technologies)
 
 ## Introduction
