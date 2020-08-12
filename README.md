@@ -7,7 +7,7 @@
 - [Introduction](#introduction)
 - [Features](#features)
 - [Screenshots](#screenshots)
-- [Setup](#setup)
+- [Lunch](#launch)
 - [Technologies](#technologies)
 
 ## Introduction
@@ -33,7 +33,7 @@ The purpose of this application was to become more familiar with browser automat
 ### Screenshot of Search Page After Console Input
 <img src="./images/screenshots/webpage_after.PNG" alt="A screenshot of the search page before entering input into the console menu.">
 
-## Setup
+## Launch
 To run, in the console enter:
 ```
 python app.py
